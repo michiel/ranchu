@@ -7,8 +7,9 @@ ranchu = require '../ranchu'
 srcDir   = ranchu.srcDir
 buildDir = ranchu.buildDir
 
-config = ranchu.config.read()
+config = {}
 
 package = module.exports = (args)->
+    config = ranchu.config.read()
     ranchu.build()
 

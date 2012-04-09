@@ -1,7 +1,7 @@
 path = require "path"
 fs   = require "fs"
 
-console.log " *** Loading helpers"
+# console.log " *** Loading helpers"
 config = require './helpers/config'
 
 console.log " *** Loading plugins"

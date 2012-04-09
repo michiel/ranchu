@@ -10,7 +10,7 @@ module.exports = {
             throw new Error "Not in a ranchu project!"
 
         config = JSON.parse file
-        console.log "Project #{config.name} at version #{config.version}"
+        # console.log "Project #{config.name} at version #{config.version}"
         config
 
     write : (config) ->

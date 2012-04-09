@@ -1,29 +1,15 @@
-ranchu = require '../ranchu'
 fs     = require 'fs'
 file   = require 'file'
 util   = require 'util'
+
+ranchu = require '../ranchu'
 
 srcDir   = ranchu.srcDir
 buildDir = ranchu.buildDir
 
 config = {}
 
-#
-# Recursive sync rmdir
-#
-
-rmdir = (path) ->
-
-    for file in fs.readdirSync path
-        currPath = "#{path}/#{file}"
-        currFile = fs.statSync currPath
-
-        if currFile.isDirectory()
-            rmdir currPath
-        else
-            fs.unlinkSync currPath
-
-    fs.rmdirSync path
+rmdir = (require '../helpers/util').rmdir
 
 mangle = (data, name)->
 
@@ -72,5 +58,7 @@ build = module.exports = (args)->
         ranchu.genxml(config).toString()
 
     walk srcDir
+
+    ranchu.log "Package completed"
 
 
