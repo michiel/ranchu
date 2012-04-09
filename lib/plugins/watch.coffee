@@ -15,7 +15,7 @@ watch = module.exports = (args)->
     dirs = util.subDirs srcDir
 
     dirs.forEach (dir) ->
-        console.log "Watching #{dir}"
+        # console.log "Watching #{dir}"
 
         fs.watch dir, {}, (event, file) ->
             ranchu.log "Change in #{file}"

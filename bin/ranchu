@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-console.log("** Running ranchu CLI");
+console.log("** Running mx/ranchu CLI");
 console.log("   /-----\\           _,           _,");
 console.log("  | BLUP! |        .' (        .-' /");
 console.log("   \\-----/       _/..._'.   .'   /");
