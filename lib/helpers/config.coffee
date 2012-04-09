@@ -4,19 +4,14 @@ configFile = 'config.json'
 
 module.exports = {
     read : ()->
-        is_ranchu = yes
-
         try
             file = fs.readFileSync configFile, 'utf-8'
         catch e
-            is_ranchu = no
+            throw new Error "Not in a ranchu project!"
 
-        if is_ranchu
-            config = JSON.parse file
-            console.log "Project #{config.name} at version #{config.version}"
-            config
-        else
-            {}
+        config = JSON.parse file
+        console.log "Project #{config.name} at version #{config.version}"
+        config
 
     write : (config) ->
             fs.writeFileSync configFile, JSON.stringify config, null, 4

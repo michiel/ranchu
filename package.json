@@ -14,6 +14,8 @@
   },
   "preferGlobal": false,
   "dependencies": {
+      "fs.extra"      : "1.0.1",
+      "file"          : "0.x.x",
       "ltx"           : "0.x.x",
       "jshint"        : "0.x.x",
       "uglify-js"     : "0.x.x",
