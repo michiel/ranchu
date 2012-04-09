@@ -1,0 +1,27 @@
+{ 
+  "name"        : "ranchu",
+  "version"     : "0.0.1",
+  "author"      : "Michiel Kalkman <michielkalkman@gmail.com>",
+  "directories" : { "lib" : "./lib" },
+  "main"        : "./lib/ranchu",
+  "bin"         : "./bin/ranchu",
+  "repository" : { 
+    "type" : "git",
+    "url"  : "http://github.com/michiel/ranchu.git"
+  },
+  "engines": {
+      "node": ">= 0.6.0"
+  },
+  "preferGlobal": false,
+  "dependencies": {
+      "ltx"           : "0.x.x",
+      "jshint"        : "0.x.x",
+      "uglify-js"     : "0.x.x",
+      "sequencer"     : "0.x.x",
+      "coffee-script" : "0.x.x"
+  },
+  "description" : "A build tool for Mendix JavaScript custom widget development",
+  "keywords" : [
+    "mendix"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+    "name"    : "ZorkName",
+    "version" : "1.0",
+    "widgetFiles" : [
+        "zorkthing.xml"
+    ],
+    "files" : [
+        "zorkthing"
+    ]
+}
+

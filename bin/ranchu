@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+console.log("** Running ranchu CLI");
+console.log("   /-----\\           _,           _,");
+console.log("  | BLUP! |        .' (        .-' /");
+console.log("   \\-----/       _/..._'.   .'   /");
+console.log("         \\ .-'`      ` '-./  _.'");
+console.log("           ( o)           ;= <_");
+console.log("            '-.,/__ __.-;`\\   '.");
+console.log("                  \\) |`\\ \\)  '.  \\ ");
+console.log("                     \\_/   jgs -._/ ");
+
+require('coffee-script');
+require('../lib/ranchu').cli();
+
