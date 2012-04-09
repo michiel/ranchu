@@ -17,6 +17,19 @@ util = module.exports = {
                 fs.unlinkSync currPath
 
         fs.rmdirSync path
+
+    subDirs : (path) ->
+        dirs = []
+
+        for file in fs.readdirSync path
+            currPath = "#{path}/#{file}"
+            currFile = fs.statSync currPath
+
+            if currFile.isDirectory()
+                dirs.push currPath
+                dirs.concat util.subDirs currPath
+        dirs
+
 }
 
 

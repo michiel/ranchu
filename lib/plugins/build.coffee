@@ -27,7 +27,10 @@ copy = (src, dst)->
     # console.log "From #{src} to #{dst}"
     [data, dst] = mangle (fs.readFileSync src, 'utf-8'), src
     # console.log "From #{src} to #{dst}"
-    fs.writeFileSync dst, data
+    try
+        fs.writeFileSync dst, data
+    catch e
+
 
 walk = (dir) ->
     file.walk dir, (nil, dirPath, dirs, files) ->
