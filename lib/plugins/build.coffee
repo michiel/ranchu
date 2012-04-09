@@ -24,12 +24,11 @@ mangle = (data, name)->
 
 
 copy = (src, dst)->
-    # console.log "From #{src} to #{dst}"
     [data, dst] = mangle (fs.readFileSync src, 'utf-8'), src
-    # console.log "From #{src} to #{dst}"
     try
         fs.writeFileSync dst, data
     catch e
+        console.log "build.copy error #{e}"
 
 
 walk = (dir) ->
@@ -37,12 +36,15 @@ walk = (dir) ->
         # console.log "Inside dir #{dirPath}"
 
         files.forEach (file) ->
-            # console.log "File #{file}"
+            # console.log "walk.File #{file}"
             copy file, file.replace(srcDir, buildDir)
 
         dirs.forEach (dir) ->
-            # console.log "Dir : #{dir}"
-            fs.mkdirSync dir.replace(srcDir, buildDir)
+            console.log "Dir : #{dir}"
+            try
+                fs.mkdirSync dir.replace(srcDir, buildDir)
+            catch e
+                console.log e
             walk dir
 
 build = module.exports = (args)->

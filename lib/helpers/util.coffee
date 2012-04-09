@@ -1,10 +1,11 @@
 fs = require 'fs'
 
-#
-# Recursive sync rmdir
-#
-
 util = module.exports = {
+
+    #
+    # Recursive sync rmdir
+    #
+
     rmdir : (path) ->
 
         for file in fs.readdirSync path
@@ -18,6 +19,10 @@ util = module.exports = {
 
         fs.rmdirSync path
 
+    #
+    # Collect all sub directories
+    #
+
     subDirs : (path) ->
         dirs = []
 
@@ -29,6 +34,9 @@ util = module.exports = {
                 dirs.push currPath
                 dirs.concat util.subDirs currPath
         dirs
+
+    fileWalk : (dir) ->
+
 
 }
 
