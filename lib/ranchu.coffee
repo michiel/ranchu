@@ -28,7 +28,7 @@ ranchu = module.exports = {
     logging  : true,
     config   : config,
     plugins  : plugins,
-    version  : '0.0.2',
+    version  : '0.0.3',
     log      : (str) ->
         if @logging then console.log " *** #{str}"
     abort    : (str) ->
