@@ -9,6 +9,10 @@ buildPrefix = "build"
 
 config = {}
 
+#
+# Recursive sync rmdir
+#
+
 rmdir = (path) ->
 
     for file in fs.readdirSync path
@@ -22,6 +26,23 @@ rmdir = (path) ->
 
     fs.rmdirSync path
 
+mangle = (data, name)->
+
+    if name.match /\.coffee$/ # and config.coffee
+        data = (require 'coffee-script').compile data
+        name = name.replace /\.coffee$/, ".js"
+
+    if name.match /\.js$/ # and config.compress
+        data = ranchu.compress data
+
+    [data, name]
+
+
+copy = (src, dst)->
+    console.log "From #{src} to #{dst}"
+    [data, dst] = mangle (fs.readFileSync src, 'utf-8'), src
+    console.log "From #{src} to #{dst}"
+    fs.writeFileSync dst, data
 
 walk = (dir) ->
     file.walk dir, (nil, dirPath, dirs, files) ->
@@ -29,9 +50,7 @@ walk = (dir) ->
 
         files.forEach (file) ->
             # console.log "File #{file}"
-            extra.copy file, file.replace(srcPrefix, buildPrefix), (msg) ->
-
-                # console.log msg
+            copy file, file.replace(srcPrefix, buildPrefix)
 
         dirs.forEach (dir) ->
             # console.log "Dir : #{dir}"

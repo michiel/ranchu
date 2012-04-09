@@ -33,6 +33,6 @@ ranchu = module.exports = {
 }
 
 plugins.forEach (plugin) ->
-    # ranchu.log "Adding plugin #{plugin}"
+    ranchu.log "Adding plugin #{plugin}"
     ranchu[plugin] = require "./plugins/" + plugin
 
