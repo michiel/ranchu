@@ -3,8 +3,8 @@ fs     = require 'fs'
 file   = require 'file'
 util   = require 'util'
 
-srcPrefix   = "src"
-buildPrefix = "build"
+srcDir   = ranchu.srcDir
+buildDir = ranchu.buildDir
 
 config = {}
 
@@ -49,11 +49,11 @@ walk = (dir) ->
 
         files.forEach (file) ->
             # console.log "File #{file}"
-            copy file, file.replace(srcPrefix, buildPrefix)
+            copy file, file.replace(srcDir, buildDir)
 
         dirs.forEach (dir) ->
             # console.log "Dir : #{dir}"
-            fs.mkdirSync dir.replace(srcPrefix, buildPrefix)
+            fs.mkdirSync dir.replace(srcDir, buildDir)
             walk dir
 
 build = module.exports = (args)->
@@ -63,13 +63,14 @@ build = module.exports = (args)->
     config.widgetFiles = []
     config.files       = []
 
-    if fs.existsSync buildPrefix
-        rmdir buildPrefix
+    if fs.existsSync buildDir
+        rmdir buildDir
 
-    fs.mkdirSync buildPrefix
+    fs.mkdirSync buildDir
 
-    fs.writeFileSync "#{buildPrefix}/package.xml", ranchu.genxml(config).toString()
+    fs.writeFileSync "#{buildDir}/package.xml",
+        ranchu.genxml(config).toString()
 
-    walk srcPrefix
+    walk srcDir
 
 

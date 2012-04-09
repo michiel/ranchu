@@ -1,8 +1,6 @@
 path = require "path"
 fs   = require "fs"
 
-logging = true
-
 console.log " *** Loading helpers"
 config = require './helpers/config'
 
@@ -25,17 +23,23 @@ plugins = pluginDirs.reduce((prev, curr) ->
 
 
 ranchu = module.exports = {
-    config  : config,
-    plugins : plugins,
-    version : '0.0.1',
-    log     : (str) ->
-        if logging then console.log " *** #{str}"
-    abort   : (str) ->
+    srcDir   : "src",
+    buildDir : "build",
+    logging  : true,
+    config   : config,
+    plugins  : plugins,
+    version  : '0.0.2',
+    log      : (str) ->
+        if @logging then console.log " *** #{str}"
+    abort    : (str) ->
         console.log "ABORT #{str}"
         process.exit -1
 }
 
 plugins.forEach (plugin) ->
     # ranchu.log "Adding plugin #{plugin}"
-    ranchu[plugin] = require "./plugins/" + plugin
+    if ranchu[plugin]?
+        console.log "Won't add plugin #{plugin} - a property or plugin of that name already exists"
+    else
+        ranchu[plugin] = require "./plugins/" + plugin
 
