@@ -3,6 +3,13 @@ fs     = require 'fs'
 
 module.exports = (args)->
     project = args[0]
+
+    if !project?
+        ranchu.abort "This task requires a project name as a paramater"
+
+    if fs.existsSync project
+        ranchu.abort "#{project} already exists here"
+
     ranchu.log "Creating new project #{project}.."
 
     fs.mkdirSync project

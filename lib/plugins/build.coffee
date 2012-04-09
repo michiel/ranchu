@@ -2,7 +2,6 @@ ranchu = require '../ranchu'
 fs     = require 'fs'
 file   = require 'file'
 util   = require 'util'
-extra  = require 'fs.extra'
 
 srcPrefix   = "src"
 buildPrefix = "build"
@@ -39,9 +38,9 @@ mangle = (data, name)->
 
 
 copy = (src, dst)->
-    console.log "From #{src} to #{dst}"
+    # console.log "From #{src} to #{dst}"
     [data, dst] = mangle (fs.readFileSync src, 'utf-8'), src
-    console.log "From #{src} to #{dst}"
+    # console.log "From #{src} to #{dst}"
     fs.writeFileSync dst, data
 
 walk = (dir) ->

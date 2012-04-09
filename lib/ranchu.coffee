@@ -30,6 +30,9 @@ ranchu = module.exports = {
     version : '0.0.1',
     log     : (str) ->
         if logging then console.log " *** #{str}"
+    abort   : (str) ->
+        console.log "ABORT #{str}"
+        process.exit -1
 }
 
 plugins.forEach (plugin) ->
