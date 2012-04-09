@@ -11,14 +11,5 @@ module.exports = (args)->
     ["src", "build"].forEach (dir) ->
         fs.mkdirSync dir
 
-    fs.writeFileSync "config.json", JSON.stringify({
-        "name"     : project
-        "version"  : "0.0.1",
-        "widgets"  : [
-        ],
-        "compress" : true,
-        "coffee"   : false
-    }, null, 4)
-
-
+    fs.writeFileSync "config.json", JSON.stringify ranchu.config.init(project), null, 4
 

@@ -1,19 +1,33 @@
 fs = require 'fs'
 
-module.exports = ()->
-    is_ranchu = yes
+configFile = 'config.json'
 
-    try
-        file = fs.readFileSync 'config.json', 'utf-8'
-    catch e
-        is_ranchu = no
+module.exports = {
+    read : ()->
+        is_ranchu = yes
 
-    if is_ranchu
-        config = JSON.parse file
-        console.log "Project #{config.name} at version #{config.version}"
-        config
-    else
-        {}
+        try
+            file = fs.readFileSync configFile, 'utf-8'
+        catch e
+            is_ranchu = no
 
+        if is_ranchu
+            config = JSON.parse file
+            console.log "Project #{config.name} at version #{config.version}"
+            config
+        else
+            {}
 
+    write : (config) ->
+            fs.writeFileSync configFile, JSON.stringify config, null, 4
 
+    init  : (name) ->
+        {
+            "name"     : name,
+            "version"  : "0.0.1",
+            "widgets"  : [
+            ],
+            "compress" : true,
+            "coffee"   : true
+        }
+}
