@@ -33,6 +33,8 @@ module.exports = (config)->
             'path' : path
         }).up()
 
+    el
+
 # cfg = {
 #     name    : 'ZorkName',
 #     version : '1.0',

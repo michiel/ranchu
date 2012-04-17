@@ -12,13 +12,13 @@ watch = module.exports = (args)->
 
     ranchu.log "Watching project #{config.name}"
 
-    dirs = util.subDirs srcDir
+    dirs = util.subDirs(srcDir).filter (dir) -> !dir.match /\/\./
 
     dirs.forEach (dir) ->
-        # console.log "Watching #{dir}"
+        ranchu.log "Watching #{dir}"
 
         fs.watch dir, {}, (event, file) ->
             ranchu.log "Change in #{file}"
-            ranchu.build()
+            ranchu.deploy()
 
 
