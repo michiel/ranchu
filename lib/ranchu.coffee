@@ -6,25 +6,28 @@ config = require './helpers/config'
 
 console.log " *** Loading plugins"
 
+getUserHome = ()->
+    process.env[ if process.platform is 'win32' then 'USERPROFILE' else 'HOME' ]
+
 pluginDirs = [
-    __dirname + "/plugins",
-    "~/.ranchu/plugins"
+    __dirname + '/plugins'
+    getUserHome() + '/.ranchu/plugins'
 ]
 
 plugins = pluginDirs.reduce((prev, curr) ->
     console.log " *** Checking #{curr}"
     if fs.existsSync curr
         prev.concat fs.readdirSync(curr).map (plugin)->
-            plugin.replace(/\.\w*$/, '')
+            [curr, plugin.replace(/\.\w*$/, '')]
     else
         prev
 
 , [])
 
 
-ranchu = module.exports = {
-    srcDir   : "src"
-    buildDir : "build"
+ranchu = module.exports =
+    srcDir   : 'src'
+    buildDir : 'build'
     logging  : true
     config   : config
     plugins  : plugins
@@ -34,12 +37,13 @@ ranchu = module.exports = {
     abort    : (str) ->
         console.log "ABORT #{str}"
         process.exit -1
-}
 
-plugins.forEach (plugin) ->
+plugins.forEach (tup) ->
+    dir    = tup[0]
+    plugin = tup[1]
     # ranchu.log "Adding plugin #{plugin}"
     if ranchu[plugin]?
         console.log "Won't add plugin #{plugin} - a property or plugin of that name already exists"
     else
-        ranchu[plugin] = require "./plugins/" + plugin
+        ranchu[plugin] = require "#{dir}/#{plugin}"
 

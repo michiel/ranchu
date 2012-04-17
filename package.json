@@ -14,6 +14,7 @@
   },
   "preferGlobal": false,
   "dependencies": {
+      "adm-zip"       : "0.x.x",
       "file"          : "0.x.x",
       "ltx"           : "0.x.x",
       "jshint"        : "0.x.x",

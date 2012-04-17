@@ -1,6 +1,6 @@
 fs = require 'fs'
 
-util = module.exports = {
+util = module.exports =
 
     #
     # Recursive sync rmdir
@@ -13,7 +13,7 @@ util = module.exports = {
             currFile = fs.statSync currPath
 
             if currFile.isDirectory()
-                util.rmdirSync currPath
+                util.rmdir currPath
             else
                 fs.unlinkSync currPath
 
@@ -24,20 +24,14 @@ util = module.exports = {
     #
 
     subDirs : (path) ->
-        (fs.readdirSync path).filter(path) ->
+        dirs = [path]
+
+        for file in fs.readdirSync path
             currPath = "#{path}/#{file}"
             currFile = fs.statSync currPath
 
             if currFile.isDirectory()
                 dirs.push currPath
                 dirs.concat util.subDirs currPath
-
-            prev.concat
-
-
-    fileWalk : (dir) ->
-
-
-}
-
+        dirs
 
