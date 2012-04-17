@@ -13,7 +13,7 @@ util = module.exports = {
             currFile = fs.statSync currPath
 
             if currFile.isDirectory()
-                util.rmdir currPath
+                util.rmdirSync currPath
             else
                 fs.unlinkSync currPath
 
@@ -24,16 +24,16 @@ util = module.exports = {
     #
 
     subDirs : (path) ->
-        dirs = []
-
-        for file in fs.readdirSync path
+        (fs.readdirSync path).filter(path) ->
             currPath = "#{path}/#{file}"
             currFile = fs.statSync currPath
 
             if currFile.isDirectory()
                 dirs.push currPath
                 dirs.concat util.subDirs currPath
-        dirs
+
+            prev.concat
+
 
     fileWalk : (dir) ->
 

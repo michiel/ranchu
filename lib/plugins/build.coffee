@@ -40,7 +40,7 @@ walk = (dir) ->
             copy file, file.replace(srcDir, buildDir)
 
         dirs.forEach (dir) ->
-            console.log "Dir : #{dir}"
+            # console.log "Dir : #{dir}"
             try
                 fs.mkdirSync dir.replace(srcDir, buildDir)
             catch e
